@@ -23,6 +23,5 @@ export const toggleTerminal = (state: IState, cb: () => void) => {
 		vscode.commands.executeCommand("workbench.action.togglePanel");
 		const newState = state.focus === EDITOR_FOCUS.terminal ? EDITOR_FOCUS.editor : EDITOR_FOCUS.terminal; 
 		state.changeFocus(newState);
-		vscode.window.showInformationMessage(state.focus);
 	});
 }

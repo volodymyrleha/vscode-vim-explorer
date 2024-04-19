@@ -26,7 +26,6 @@ export const toggleSearch = (state: IState, cb: () => void) => {
 		} else {
 			openSearch(state);
 		}
-		vscode.window.showInformationMessage(state.focus);
 	});
 };
 
@@ -40,6 +39,5 @@ export const toggleSearchResultsAndInput = (state: IState) => {
 			vscode.commands.executeCommand('workbench.action.findInFiles');
 			state.changeSearchFocus(SEARCH_SIDEBAR_FOCUS.input);
 		}
-		vscode.window.showInformationMessage(state.searchFocus);
 	});
 } 

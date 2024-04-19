@@ -22,6 +22,5 @@ export const toggleGit = (state: IState, cb: () => void) => {
 			vscode.commands.executeCommand('workbench.view.scm');
 			state.changeFocus(EDITOR_FOCUS.git);
 		}
-		vscode.window.showInformationMessage(state.focus);
 	});
 }

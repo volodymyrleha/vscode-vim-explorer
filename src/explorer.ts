@@ -19,14 +19,11 @@ export const toggleExplorer = (state: IState, cb: () => void) => {
 		cb();
 
 		if (state.focus !== EDITOR_FOCUS.explorer) {
-			vscode.window.showInformationMessage('FIRST');
 			vscode.commands.executeCommand('workbench.view.explorer');
 			state.changeFocus(EDITOR_FOCUS.explorer);
 		} else {
-			vscode.window.showInformationMessage('SECOND');
 			vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility");
 			state.changeFocus(EDITOR_FOCUS.editor);
 		}
-		vscode.window.showInformationMessage(state.focus);
 	});
 };
