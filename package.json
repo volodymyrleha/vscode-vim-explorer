@@ -1,47 +1,234 @@
 {
-  "name": "vim-explorer",
-  "displayName": "VIM Explorer",
-  "description": "vscode extension for vim motions users",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.88.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [],
-  "main": "./dist/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "vim-explorer.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run package",
-    "compile": "webpack",
-    "watch": "webpack --watch",
-    "package": "webpack --mode production --devtool hidden-source-map",
-    "compile-tests": "tsc -p . --outDir out",
-    "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "npm run compile-tests && npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "vscode-test"
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.88.0",
-    "@types/mocha": "^10.0.6",
-    "@types/node": "18.x",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
-    "eslint": "^8.57.0",
-    "typescript": "^5.3.3",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4",
-    "@vscode/test-cli": "^0.0.8",
-    "@vscode/test-electron": "^2.3.9"
-  }
+	"name": "vscode-vim-helper",
+	"displayName": "Visual Studio Code Vim Helper",
+	"description": "Visual Studio Code extension for Vim motions users",
+	"version": "0.1.0",
+	"engines": {
+		"vscode": "^1.88.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"keybindings": [
+			{
+				"key": "ctrl+e",
+				"command": "extension.toggleExplorer"
+			},
+			{
+				"key": "cmd+e",
+				"command": "extension.toggleExplorer"
+			},
+			{
+				"key": "n",
+				"command": "explorer.newFile",
+				"when": "filesExplorerFocus && !inputFocus" 
+			},
+			{
+				"key": "r",
+				"command": "renameFile",
+				"when": "filesExplorerFocus && !inputFocus" 
+			},
+			{
+				"key": "f",
+				"command": "explorer.newFolder",
+				"when": "filesExplorerFocus && !inputFocus" 
+			},
+			{
+				"key": "d",
+				"command": "deleteFile",
+				"when": "filesExplorerFocus && !inputFocus" 
+			},
+			{
+				"key": "ctrl+j",
+				"command": "extension.toggleTerminal"
+			},
+			{
+				"key": "cmd+j",
+				"command": "extension.toggleTerminal"
+			},
+			{
+				"key": "ctrl+n",
+				"command": "workbench.action.terminal.new",
+				"when": "terminalFocus"
+			},
+			{
+				"key": "cmd+n",
+				"command": "workbench.action.terminal.new",
+				"when": "terminalFocus"
+			},
+			{
+				"key": "ctrl+w",
+				"command": "workbench.action.terminal.kill",
+				"when": "terminalFocus"
+			},
+			{
+				"key": "cmd+w",
+				"command": "workbench.action.terminal.kill",
+				"when": "terminalFocus"
+			},
+			{
+				"key": "ctrl+a",
+				"command": "workbench.action.terminal.focusNext",
+				"when": "terminalFocus"
+			},
+			{
+				"key": "cmd+a",
+				"command": "workbench.action.terminal.focusNext",
+				"when": "terminalFocus"
+			},
+			{
+				"key": "ctrl+b",
+				"command": "workbench.action.terminal.focusPrevious",
+				"when": "terminalFocus"
+			},
+			{
+				"key": "cmd+b",
+				"command": "workbench.action.terminal.focusPrevious",
+				"when": "terminalFocus"
+			},
+			{
+				"key": "ctrl+n",
+				"command": "selectNextSuggestion",
+				"when": "editorTextFocus && suggestWidgetVisible"
+			},
+			{
+				"key": "cmd+n",
+				"command": "selectNextSuggestion",
+				"when": "editorTextFocus && suggestWidgetVisible"
+			},
+			{
+				"key": "ctrl+p",
+				"command": "selectPrevSuggestion",
+				"when": "editorTextFocus && suggestWidgetVisible"
+			},
+			{
+				"key": "cmd+p",
+				"command": "selectPrevSuggestion",
+				"when": "editorTextFocus && suggestWidgetVisible"
+			},
+			{
+				"key": "ctrl+f",
+				"command": "extension.toggleSearch"
+			},
+			{
+				"key": "cmd+f",	
+				"command": "extension.toggleSearch"
+			},
+			{
+				"key": "ctrl+n",
+				"command": "extension.toggleSearchResultsAndInput",
+				"when": "searchViewletVisible"
+			},
+			{
+				"key": "cmd+n",
+				"command": "extension.toggleSearchResultsAndInput",
+				"when": "searchViewletVisible"
+			},
+			{
+				"key": "ctrl+g",
+				"command": "extension.toggleGit"
+			},
+			{
+				"key": "cmd+g",
+				"command": "extension.toggleGit"
+			},
+			{
+				"key": "ctrl+n",
+				"command": "list.focusLast",
+				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+			},
+			{
+				"key": "ctrl+c",
+				"command": "git.commit",
+				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+			},
+			{
+				"key": "ctrl+a",
+				"command": "git.stage",
+				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+			},
+			{
+				"key": "ctrl+d",
+				"command": "git.unstage",
+				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+			},
+			{
+				"key": "ctrl+r",
+				"command": "git.clean",
+				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+			},
+			{
+				"key": "ctrl+p",
+				"command": "git.pull",
+				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+			},
+			{
+				"key": "ctrl+P",
+				"command": "git.push",
+				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+			},
+			{
+				"key": "ctrl+b",
+				"command": "git.checkout",
+				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+			},
+			{
+				"key": "ctrl+m",
+				"command": "git.merge",
+				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+			}
+		],
+		"commands": [
+			{
+				"command": "extension.toggleExplorer",
+				"title": "VIM: Toggle Explorer"
+			},
+			{
+				"command": "extension.toggleSearch",
+				"title": "VIM: Toggle Search"
+			},
+			{
+				"command": "extension.toggleTerminal",
+				"title": "VIM: Toggle Terminal"
+			},
+			{
+				"command": "extension.toggleSearchResultsAndInput",
+				"title": "VIM: Toggle Search Results And Input"
+			},
+			{
+				"command": "extension.toggleGit",
+				"title": "VIM: Toggle Git"	
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run package",
+		"compile": "webpack",
+		"watch": "webpack --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "npm run compile-tests && npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "vscode-test"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.88.0",
+		"@types/mocha": "^10.0.6",
+		"@types/node": "18.x",
+		"@typescript-eslint/eslint-plugin": "^7.4.0",
+		"@typescript-eslint/parser": "^7.4.0",
+		"eslint": "^8.57.0",
+		"typescript": "^5.3.3",
+		"ts-loader": "^9.5.1",
+		"webpack": "^5.91.0",
+		"webpack-cli": "^5.1.4",
+		"@vscode/test-cli": "^0.0.8",
+		"@vscode/test-electron": "^2.3.9"
+	}
 }

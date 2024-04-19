@@ -1,25 +1,66 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { closeTerminal, handleTerminalClose, closeAllTerminals, toggleTerminal } from './terminal';
+import { EDITOR_FOCUS, State } from './State';
+import { closeExplorer, openExplorerIfNoTextEditors, toggleExplorer } from './explorer';
+import { closeGitDiffTabs, toggleGit } from './git';
+import { toggleSearch, toggleSearchResultsAndInput } from './search';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+const state = new State();
+
+const handleSelectionChange = () => {
+	closeExplorer(state);
+	closeTerminal(state);
+	if (state.focus === EDITOR_FOCUS.explorer || state.focus === EDITOR_FOCUS.terminal) {
+		state.changeFocus(EDITOR_FOCUS.editor);
+	}
+}
+
+const handleOpenDocument = () => {
+	if (state.prevFocus === EDITOR_FOCUS.git) {
+		return;
+	}
+	closeExplorer(state);
+	closeTerminal(state);
+	if (state.focus === EDITOR_FOCUS.explorer || state.focus === EDITOR_FOCUS.terminal) {
+		state.changeFocus(EDITOR_FOCUS.editor);
+	}
+}
+
+// TODO: test git shortcuts
 export function activate(context: vscode.ExtensionContext) {
+	openExplorerIfNoTextEditors(state);
+	closeAllTerminals();
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vim-explorer" is now active!');
+	context.subscriptions.push(toggleExplorer(state, () => {
+		if (state.focus === EDITOR_FOCUS.terminal) {
+			closeTerminal(state);
+		}	
+		closeGitDiffTabs();
+	}));
+	context.subscriptions.push(toggleTerminal(state, () => {
+		if (state.isSidebarOpen) {
+			vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility");
+		}
+		closeGitDiffTabs();
+	}));
+	// FIXME: closing terminal after opening search with ctrl + n strange behavior
+	context.subscriptions.push(toggleSearch(state, () => {
+		if (state.focus === EDITOR_FOCUS.terminal) {
+			closeTerminal(state);
+		}	
+		closeGitDiffTabs();
+	}));
+	context.subscriptions.push(toggleSearchResultsAndInput(state));
+	context.subscriptions.push(toggleGit(state, () => {
+		if (state.focus === EDITOR_FOCUS.terminal) {
+			closeTerminal(state);
+		}	
+		closeGitDiffTabs();
+	}));
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('vim-explorer.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from VIM Explorer!');
-	});
-
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(vscode.window.onDidChangeTextEditorSelection(handleSelectionChange));;
+	context.subscriptions.push(vscode.window.onDidCloseTerminal(() => handleTerminalClose(state)));;
+	context.subscriptions.push(vscode.workspace.onDidOpenTextDocument(handleOpenDocument));;
 }
 
 // This method is called when your extension is deactivated
