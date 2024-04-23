@@ -2,7 +2,7 @@
 	"name": "vscode-vim-helper",
 	"displayName": "Visual Studio Code Vim Helper",
 	"description": "Visual Studio Code extension for Vim motions users",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"engines": {
 		"vscode": "^1.88.0"
 	},
@@ -140,47 +140,62 @@
 			{
 				"key": "ctrl+n",
 				"command": "list.focusLast",
-				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+				"when": "sideBarVisible && activeViewlet === 'workbench.view.scm'"
 			},
 			{
-				"key": "ctrl+c",
+				"key": "cmd+n",
+				"command": "list.focusLast",
+				"when": "sideBarVisible && activeViewlet === 'workbench.view.scm'"
+			},
+			{
+				"key": "alt+c",
 				"command": "git.commit",
-				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
 			},
 			{
-				"key": "ctrl+a",
+				"key": "alt+a",
 				"command": "git.stage",
-				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
 			},
 			{
-				"key": "ctrl+d",
+				"key": "alt+shift+a",
+				"command": "git.stageAll",
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
+			},
+			{
+				"key": "alt+r",
 				"command": "git.unstage",
-				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
 			},
 			{
-				"key": "ctrl+r",
+				"key": "alt+shift+r",
+				"command": "git.unstageAll",
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
+			},
+			{
+				"key": "alt+d",
 				"command": "git.clean",
-				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
 			},
 			{
-				"key": "ctrl+p",
+				"key": "alt+p",
 				"command": "git.pull",
-				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
 			},
 			{
-				"key": "ctrl+P",
+				"key": "alt+shift+p",
 				"command": "git.push",
-				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
 			},
 			{
-				"key": "ctrl+b",
+				"key": "alt+b",
 				"command": "git.checkout",
-				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
 			},
 			{
-				"key": "ctrl+m",
+				"key": "alt+m",
 				"command": "git.merge",
-				"when": "workbench.scm.visible && !filesExplorerFocus && !searchViewletVisible"
+				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
 			}
 		],
 		"commands": [
