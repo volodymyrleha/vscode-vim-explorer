@@ -122,6 +122,36 @@
 				"when": "editorTextFocus && suggestWidgetVisible"
 			},
 			{
+				"key": "ctrl+l",
+				"command": "workbench.action.acceptSelectedQuickOpenItem",
+				"when": "inQuickOpen"
+			},
+			{
+				"key": "cmd+l",
+				"command": "workbench.action.acceptSelectedQuickOpenItem",
+				"when": "inQuickOpen"
+			},
+			{
+				"key": "ctrl+j",
+				"command": "workbench.action.quickOpenSelectNext",
+				"when": "inQuickOpen"
+			},
+			{
+				"key": "cmd+j",
+				"command": "workbench.action.quickOpenSelectNext",
+				"when": "inQuickOpen"
+			},
+			{
+				"key": "ctrl+k",
+				"command": "workbench.action.quickOpenSelectPrevious",
+				"when": "inQuickOpen"
+			},
+			{
+				"key": "cmd+k",
+				"command": "workbench.action.quickOpenSelectPrevious",
+				"when": "inQuickOpen"
+			},
+			{
 				"key": "ctrl+f",
 				"command": "extension.toggleSearch"
 			},
