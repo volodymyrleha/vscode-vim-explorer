@@ -11,6 +11,8 @@ export const closeGit = (state: IState) => {
 	}
 };
 
+// TODO: add files manipulation in the source control tree view
+// FIXME: ctrl+n return to previous selected item in the tree view (not the last one)
 export const toggleGit = (state: IState, cb: () => void) => {
 	return vscode.commands.registerCommand("extension.toggleGit", () => {
 		cb();

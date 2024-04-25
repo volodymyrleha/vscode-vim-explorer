@@ -92,22 +92,32 @@
 				"when": "terminalFocus"
 			},
 			{
-				"key": "ctrl+n",
+				"key": "ctrl+l",
+				"command": "acceptSelectedSuggestion",
+				"when": "editorTextFocus && suggestWidgetVisible"
+			},
+			{
+				"key": "cmd+l",
+				"command": "acceptSelectedSuggestion",
+				"when": "editorTextFocus && suggestWidgetVisible"
+			},
+			{
+				"key": "ctrl+j",
 				"command": "selectNextSuggestion",
 				"when": "editorTextFocus && suggestWidgetVisible"
 			},
 			{
-				"key": "cmd+n",
+				"key": "cmd+j",
 				"command": "selectNextSuggestion",
 				"when": "editorTextFocus && suggestWidgetVisible"
 			},
 			{
-				"key": "ctrl+p",
+				"key": "ctrl+k",
 				"command": "selectPrevSuggestion",
 				"when": "editorTextFocus && suggestWidgetVisible"
 			},
 			{
-				"key": "cmd+p",
+				"key": "cmd+k",
 				"command": "selectPrevSuggestion",
 				"when": "editorTextFocus && suggestWidgetVisible"
 			},

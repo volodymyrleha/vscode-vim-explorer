@@ -26,7 +26,7 @@ const handleOpenDocument = () => {
 	}
 }
 
-// TODO: test git shortcuts
+// TODO: Add keybindings to go down and up in files palette
 export function activate(context: vscode.ExtensionContext) {
 	openExplorerIfNoTextEditors(state);
 	closeAllTerminals();

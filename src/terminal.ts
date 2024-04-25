@@ -17,6 +17,7 @@ export const closeAllTerminals = () => {
 	vscode.window.terminals.forEach(terminal => terminal.dispose());
 };
 
+// TODO: create manipulation as vim motion for terminal (prev, next command, horizontal cursor movement)
 export const toggleTerminal = (state: IState, cb: () => void) => {
 	return vscode.commands.registerCommand("extension.toggleTerminal", () => {
 		cb();
