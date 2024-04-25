@@ -15,7 +15,11 @@ const handleSelectionChange = () => {
 	}
 }
 
-const handleOpenDocument = () => {
+const handleOpenDocument = (document: vscode.TextDocument) => {
+	if (state.focus === EDITOR_FOCUS.editor) {
+		state.changeLastOpenedFile(document.fileName);	
+	}
+
 	if (state.prevFocus === EDITOR_FOCUS.git) {
 		return;
 	}

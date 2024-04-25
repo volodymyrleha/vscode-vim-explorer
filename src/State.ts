@@ -22,19 +22,23 @@ export interface IState {
 	prevFocus: EDITOR_FOCUS;
 	searchFocus: SEARCH_SIDEBAR_FOCUS,
 	isSidebarOpen: boolean;
+	lastOpenedFile: string | null;
 	changeFocus: (focus: EDITOR_FOCUS) => void,
 	changeSearchFocus: (focus: SEARCH_SIDEBAR_FOCUS) => void,
+	changeLastOpenedFile: (fileName: string) => void,
 }
 
 export class State implements IState {
 	focus: EDITOR_FOCUS;
 	prevFocus: EDITOR_FOCUS;
 	searchFocus: SEARCH_SIDEBAR_FOCUS;
+	lastOpenedFile: string | null;
 
 	constructor() {
 		this.focus = EDITOR_FOCUS.editor;
 		this.prevFocus = EDITOR_FOCUS.editor;
 		this.searchFocus = SEARCH_SIDEBAR_FOCUS.input;
+		this.lastOpenedFile = null;
 	}
 
 	get isSidebarOpen() {
@@ -48,5 +52,13 @@ export class State implements IState {
 
 	changeSearchFocus(focus: SEARCH_SIDEBAR_FOCUS) {
 		this.searchFocus = focus;
+	}
+
+	changeLastOpenedFile(fileName: string) {
+		if (fileName.split('.').pop() === 'git') {
+			return;
+		}
+
+		this.lastOpenedFile = fileName;
 	}
 }
