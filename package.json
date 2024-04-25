@@ -2,7 +2,7 @@
 	"name": "vscode-vim-helper",
 	"displayName": "Visual Studio Code Vim Helper",
 	"description": "Visual Studio Code extension for Vim motions users",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"engines": {
 		"vscode": "^1.88.0"
 	},
