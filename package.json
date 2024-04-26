@@ -224,7 +224,7 @@
 			},
 			{
 				"key": "alt+shift+p",
-				"command": "git.push",
+				"command": "git.pushTo",
 				"when": "sideBarVisible && activeViewlet == 'workbench.view.scm'"
 			},
 			{
