@@ -30,7 +30,6 @@ const handleOpenDocument = (document: vscode.TextDocument) => {
 	}
 }
 
-// TODO: Add keybindings to go down and up in files palette
 // TODO: test windows keybindings (each that starts with ctrl)
 export function activate(context: vscode.ExtensionContext) {
 	openExplorerIfNoTextEditors(state);
