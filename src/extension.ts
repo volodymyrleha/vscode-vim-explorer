@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { closeTerminal, handleTerminalClose, closeAllTerminals, toggleTerminal } from './terminal';
+import { closeTerminal, handleTerminalClose, closeAllTerminals, toggleTerminal, setFocusOnTerminal } from './terminal';
 import { EDITOR_FOCUS, State } from './State';
 import { closeExplorer, openExplorerIfNoTextEditors, toggleExplorer } from './explorer';
 import { closeGitDiffTabs, toggleGit } from './git';
@@ -61,6 +61,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}	
 		closeGitDiffTabs();
 	}));
+	context.subscriptions.push(setFocusOnTerminal(state, () => {}));
 
 	context.subscriptions.push(vscode.window.onDidChangeTextEditorSelection(handleSelectionChange));;
 	context.subscriptions.push(vscode.window.onDidCloseTerminal(() => handleTerminalClose(state)));;

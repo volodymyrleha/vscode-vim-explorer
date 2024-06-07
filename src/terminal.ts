@@ -26,3 +26,10 @@ export const toggleTerminal = (state: IState, cb: () => void) => {
 		state.changeFocus(newState);
 	});
 }
+
+export const setFocusOnTerminal = (state: IState, cb: () => void) => {
+	return vscode.commands.registerCommand("extension.setFocusOnTerminal", () => {
+		cb();
+		state.changeFocus(EDITOR_FOCUS.terminal);
+	});
+}
